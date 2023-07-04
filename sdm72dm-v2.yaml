@@ -36,13 +36,13 @@ modbus_controller:
   - id: modbus_controller_a
     modbus_id: modbus_a
     address: 0x2
-    update_interval: 1s
+    update_interval: 3s
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: modbus_controller_a
-    id: l1
-    name: "L1"
+    id: "l1_power"
+    name: "L1 Power"
     address: 0x000C
     unit_of_measurement: "W"
     state_class: "measurement"
@@ -52,8 +52,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: modbus_controller_a
-    id: l2
-    name: "L2"
+    id: "l2_power"
+    name: "L2 Power"
     address: 0x000E
     unit_of_measurement: "W"
     state_class: "measurement"
@@ -63,11 +63,24 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: modbus_controller_a
-    id: l3
-    name: "L3"
+    id: "l3_power"
+    name: "L3 Power"
     address: 0x0010
     unit_of_measurement: "W"
     state_class: "measurement"
     device_class: "power"
     register_type: read
     value_type: FP32
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_controller_a
+    id: "import_energy"
+    name: "Import Energy"
+    address: 0x0048
+    unit_of_measurement: "kWh"
+    state_class: "total"
+    device_class: "energy"
+    register_type: read
+    value_type: FP32
+    skip_updates: 60
+    accuracy_decimals: 2

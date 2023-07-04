@@ -1,0 +1,73 @@
+esphome:
+  name: rh-sdm72dm-v2-inverter
+  friendly_name: Riehlhome SDM72DM-V2 (Inverter)
+  name_add_mac_suffix: true
+
+esp32:
+  board: esp32-poe-iso
+  framework:
+    type: arduino
+
+logger:
+api:
+ota:
+
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO23
+  mdio_pin: GPIO18
+  clk_mode: GPIO17_OUT
+  phy_addr: 0
+  power_pin: GPIO12
+
+uart:
+  id: uart_a
+  tx_pin: 04
+  rx_pin: 36
+  baud_rate: 19200
+  data_bits: 8
+  stop_bits: 1
+
+modbus:
+  send_wait_time: 10ms
+  id: modbus_a
+
+modbus_controller:
+  - id: modbus_controller_a
+    modbus_id: modbus_a
+    address: 0x2
+    update_interval: 1s
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: modbus_controller_a
+    id: l1
+    name: "L1"
+    address: 0x000C
+    unit_of_measurement: "W"
+    state_class: "measurement"
+    device_class: "power"
+    register_type: read
+    value_type: FP32
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_controller_a
+    id: l2
+    name: "L2"
+    address: 0x000E
+    unit_of_measurement: "W"
+    state_class: "measurement"
+    device_class: "power"
+    register_type: read
+    value_type: FP32
+
+  - platform: modbus_controller
+    modbus_controller_id: modbus_controller_a
+    id: l3
+    name: "L3"
+    address: 0x0010
+    unit_of_measurement: "W"
+    state_class: "measurement"
+    device_class: "power"
+    register_type: read
+    value_type: FP32

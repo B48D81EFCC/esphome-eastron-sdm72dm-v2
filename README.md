@@ -1,5 +1,5 @@
-# EASTRON SDM72DM-V2 ESPHome config
-Retrieve values from EASTRON SDM72DM-V2 via RS485 (Modbus) using ESPHome
+# EASTRON SDM72DM-V2 LAN Gateway with ESPHome
+Retrieve values from EASTRON SDM72DM-V2 via RS485 (Modbus) using a ESP32 + ESPHome.
 
 ## Hardware
 1x OLIMEX ESP32-POE (or OLIMEX ESP32-POE-ISO)  
